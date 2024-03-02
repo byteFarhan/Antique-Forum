@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antique Forum</title>
+    <!-- favIcon -->
+    <link rel="shortcut icon" href="./images/joinforum.png" type="image/x-icon">
+    <!-- Fontawesome's CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter & Mulish -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+    <!-- Tailwind CSS's CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Daisy UI's CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.4.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <!-- Tailwind CSS Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mulish: "'Mulish', sans-serif",
+                        mulish: "'Inter', sans-serif"
+                    },
+                    colors: {
+                        primary: '#797DFC',
+                        title: '#12132D',
+                        natural: '#12132d99',
+                        'dark-gray': '#12132dcc'
+                    }
+                },
+                container: {
+                    center: true,
+                    padding: {
+                        DEFAULT: '1.5rem',
+                        // md: '2rem',
+                        // lg: '4rem',
+                        // xl: '5rem',
+                        // '2xl': '6rem'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Tailwind CSS Customization -->
+    <style type="text/tailwindcss">
+
+        @layer base {
+      h2, h3 {
+        @apply font-black text-title mb-2;
+      }
+      h2 {
+        @apply text-3xl;
+      }
+      h3 {
+        @apply text-2xl;
+      }
+    }
+    @layer components {
+      .btn-primary {
+        @apply bg-primary border-primary hover:bg-primary hover:border-primary text-white capitalize text-base font-bold;
+      }
+    }
+  </style>
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <!-- website content gose here! -->
+    </main>
+    <footer></footer>
+
+</body>
+
+</html>
