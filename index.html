@@ -53,16 +53,16 @@
 
         @layer base {
       h1,h2, h3 {
-        @apply font-black text-title mb-2;
+        @apply font-black text-title leading-normal;
       }
       h1{
         @apply text-4xl md:text-5xl lg:text-6xl leading-normal
       }
       h2 {
-        @apply text-3xl;
+        @apply text-3xl text-[40px];
       }
       h3 {
-        @apply text-2xl;
+        @apply text-2xl lg:text-3xl;
       }
       p{
         @apply text-natural font-inter text-base leading-normal;
@@ -89,7 +89,7 @@
                         </svg>
                     </div>
                     <ul tabindex="0"
-                        class="dropdown-content mt-3 z-[1] p-2 shadow-md bg-base-100 rounded-box w-52 text-center space-y-3 *:cursor-pointer">
+                        class="dropdown-content mt-3 z-[1] shadow-xl bg-base-100 rounded-box w-52 text-center space-y-3 *:cursor-pointer p-5">
                         <li class="p-3 bg-slate-200 rounded-full"><img src="./images/Frame (3).svg" alt=""
                                 class="size-6 mx-auto"></li>
                         <li class="p-3 bg-slate-200 rounded-full"><img src="./images/Frame.svg" alt=""
@@ -213,9 +213,46 @@
                 <img src="./images/joinforum.png" alt="">
             </div>
         </section>
+        <!-- Latest Posts Section -->
+        <section>
+            <div class="space-y-6 text-center mb-12">
+                <h2>Latest Posts</h2>
+                <p class="w-full md:w-3/4 lg:w-2/4 mx-auto">Yes, you can run unit tests and view the results directly
+                    within the app. The integrated testing
+                    features allow for a streamlined .</p>
+            </div>
+            <div id="latest-posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- <div class="card p-5 bg-base-100 rounded-2xl border border-[#12132d26]">
+                    <figure class="">
+                        <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes"
+                            class="rounded-2xl" />
+                    </figure>
+                    <div class="items-center space-y-3 mt-5">
+                        <div class="text-natural flex gap-2 items-center">
+                            <i class="fa-regular fa-calendar-days"></i>
+                            <p>29 January 2024</p>
+                        </div>
+                        <h5 class="text-lg font-extrabold font-mulish leading-normal text-title">What will a mars
+                            habitat
+                            force that
+                            impact in our
+                            daily life!!!</h5>
+                        <p class="font-mulish">Yes, you can run unit tests and view the results directly within the
+                            app. </p>
+                        <div class="flex gap-4 items-center">
+                            <img src="./images/logo.png" alt="" class="size-10 object-cover">
+                            <div>
+                                <h6 class="font-bold">Cameron Williamson</h6>
+                                <p class="text-sm font-mulish">Unknown</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div> -->
+            </div>
+        </section>
     </main>
     <footer class="bg-[#12132D0D] py-10 lg:pt-24 lg:pb-16">
-
         <div class="max-w-[1280px] container text-center">
             <div class="w-full md:w-3/4 lg:w-2/4 mx-auto space-y-4">
                 <h3 class="text-4xl font-black">ReTro</h3>
@@ -235,7 +272,7 @@
         </div>
 
     </footer>
-
+    <script src="./JS/forum.js"></script>
 </body>
 
 </html>
