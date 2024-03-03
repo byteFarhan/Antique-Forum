@@ -52,14 +52,20 @@
     <style type="text/tailwindcss">
 
         @layer base {
-      h2, h3 {
-        @apply font-bold text-title mb-2;
+      h1,h2, h3 {
+        @apply font-black text-title mb-2;
+      }
+      h1{
+        @apply text-6xl leading-normal
       }
       h2 {
         @apply text-3xl;
       }
       h3 {
         @apply text-2xl;
+      }
+      p{
+        @apply text-natural font-inter text-base;
       }
     }
     @layer components {
@@ -116,11 +122,87 @@
                 <a class="btn btn-primary">Button</a>
             </div>
         </nav>
+        <!-- <img src="./images/bgbanner.png" alt=""> -->
+        <!-- Banner Section -->
+        <section id="banner" class="bg-[#12132D] pt-28 rounded-3xl relative mt-12">
+            <!-- <section id="banner"
+            class="bg-[linear-gradient(90deg,#12132D,#12132D),url('./images/bgbanner.png')] py-80 bg-no-repeat bg-cover bg-bottom rounded-3xl"> -->
+            <!-- <section id="banner"
+            class="bg-[url('./images/bgbanner.png'),_linear-gradient(180deg,_#12132D,_transparent)] py-80 bg-no-repeat bg-cover bg-bottom rounded-3xl"> -->
+            <div>
+                <div class="px-24 flex justify-between items-center absolute w-full">
+                    <div class="flex-grow">
+                        <div class="w-2/3">
+                            <h1 class="text-white">Welcome to the <span
+                                    class="text-transparent bg-clip-text bg-gradient-to-r from-[#797DFC] to-[rgba(121, 125, 252, 0.00)]">ReTro</span>
+                                Forum</h1>
+                            <p class="text-xl text-white font-medium leading-9 mb-8">Share your favorite opinion and win
+                                and
+                                wp
+                                forum
+                                coffee mug!</p>
+                            <div>
+
+                                <form>
+                                    <label for="search"
+                                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                                    <div class="relative">
+                                        <div
+                                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                            </svg>
+                                        </div>
+                                        <input type="search" id="search"
+                                            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-0 focus:border-0"
+                                            placeholder="Search" required />
+                                        <button type="submit"
+                                            class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-full text-sm px-4 py-2">Search</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="basis-2/6">
+                        <div class="bg-white p-10 rounded-2xl *:flex *:justify-between  space-y-6">
+                            <div class="*:text-dark-gray *:text-xl *:font-medium *:font-mulish">
+                                <p>Registered Users</p>
+                                <p>50</p>
+                            </div>
+                            <div class="*:text-dark-gray *:text-xl *:font-medium *:font-mulish">
+                                <p>Forum</p>
+                                <p>05</p>
+                            </div>
+                            <div class="*:text-dark-gray *:text-xl *:font-medium *:font-mulish">
+                                <p>Topics</p>
+                                <p>05</p>
+                            </div>
+                            <div class="*:text-dark-gray *:text-xl *:font-medium *:font-mulish">
+                                <p>Replies</p>
+                                <p>100</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="pb-10"></div>
+            </div>
+
+
+            <img src="./images/bgbanner.png" alt="" class="object-cover w-full">
+        </section>
     </header>
+
     <main>
         <!-- website content gose here! -->
     </main>
-    <footer></footer>
+    <footer>
+
+    </footer>
 
 </body>
 
