@@ -1,20 +1,20 @@
 let makeAsRead = 0;
-async function getData(url) {
+async function getLatestPosts(url) {
   try {
     // const res = await fetch(
     //   "https://openapi.programming-hero.com/api/retro-forum/latest-posts"
     // );
     const res = await fetch(url);
     const datas = await res.json();
-    console.log(datas);
+    // console.log(datas);
     // return data;
-    displayDatas(datas);
+    displayLatestPosts(datas);
   } catch (e) {
     console.error(e.message);
   }
 }
 
-function displayDatas(datas) {
+function displayLatestPosts(datas) {
   //   console.log(datas);
   const latestPostSection = document.getElementById("latest-posts");
   datas.forEach((data) => {
@@ -61,36 +61,42 @@ function displayDatas(datas) {
   });
 }
 
-// const latestPosts = getData(
+// const latestPosts = getLatestPosts(
 //     "https://openapi.programming-hero.com/api/retro-forum/latest-posts"
 //   );
 //   console.log(latestPosts);
-getData("https://openapi.programming-hero.com/api/retro-forum/latest-posts");
+getLatestPosts(
+  "https://openapi.programming-hero.com/api/retro-forum/latest-posts"
+);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 async function getPosts(url) {
+  toogleLoadingSpinner(true);
   try {
     const res = await fetch(url);
     const posts = await res.json();
-    console.log(posts);
-    displayPosts(posts.posts);
+    // console.log(posts);
+    setTimeout(() => {
+      displayPosts(posts.posts);
+    }, 2000);
+    // displayPosts(posts.posts);
   } catch (e) {
     console.error(e.message);
   }
 }
 
 function displayPosts(posts) {
-  console.log(posts);
+  // console.log(posts);
   posts.forEach((post) => {
     const postsContainer = document.getElementById("post-container");
     // const makeAsReadTotla = document.getElementById("make-as-read-total");
     // const makeAsReadContainer = document.getElementById(
     //   "make-as-read-container"
     // );
-    console.log(post);
+    // console.log(post);
     const div = document.createElement("div");
     div.classList =
-      "flex gap-4 md:gap-6 p-6 md:p-8 lg:p-10 rounded-3xl bg-[#F3F3F5] hover:bg-[#797dfc1a] border border-transparent hover:border-primary delay-100";
+      "flex gap-4 md:gap-6 p-6 md:p-8 lg:p-10 rounded-3xl bg-[#F3F3F5] hover:bg-[#797dfc1a] border border-transparent hover:border-primary delay-100 mb-6";
     div.innerHTML = `
                         <div class="">
                             <div class="relative">
@@ -98,7 +104,9 @@ function displayPosts(posts) {
                                   post?.image
                                 } alt=${post?.author?.name}>
                                 <span class="absolute top-0.5 left-10 md:left-12 lg:left-14 transform -translate-y-1/2 size-3.5 rounded-full ${
-                                  post?.isActive ? "bg-[#10B981]" : "bg-[#FF3434]"
+                                  post?.isActive
+                                    ? "bg-[#10B981]"
+                                    : "bg-[#FF3434]"
                                 }"></span>
                             </div>
                         </div>
@@ -130,7 +138,10 @@ function displayPosts(posts) {
                                 </div>
                                 <div>
                                 <img
-                                 onclick="addToMakeAsRead('${post?.title.replace("'","")}', '${post?.view_count}')"
+                                 onclick="addToMakeAsRead('${post?.title.replace(
+                                   "'",
+                                   ""
+                                 )}', '${post?.view_count}')"
                                  src="./images/email 1.svg" alt="" class="size-6 md:size-7 cursor-pointer">
                                 </div>
                             </div>
@@ -140,6 +151,7 @@ function displayPosts(posts) {
       `;
     postsContainer.appendChild(div);
   });
+  toogleLoadingSpinner(false);
 }
 function addToMakeAsRead(title, views) {
   // title.replace("", "")
@@ -153,7 +165,8 @@ function addToMakeAsRead(title, views) {
   const makeAsReadTotlal = document.getElementById("make-as-read-total");
   const makeAsReadContainer = document.getElementById("make-as-read-conatiner");
   const div = document.createElement("div");
-  div.classList = "bg-white p-4 rounded-xl flex justify-between items-start gap-2";
+  div.classList =
+    "bg-white p-4 rounded-xl flex justify-between items-start gap-2";
   div.innerHTML = `
 <h4 class="md:text-lg text-title font-semibold md:font-bold leading-normal font-mulish">${title}</h4>
 <div class="flex items-center gap-2 *:md:text-lg">
@@ -168,18 +181,33 @@ function addToMakeAsRead(title, views) {
 
 getPosts("https://openapi.programming-hero.com/api/retro-forum/posts");
 
-const searchField = document.getElementById("search-field")
-const btnSearch = document.getElementById('btn-search')
-btnSearch.addEventListener('click',(e)=>{
-  e.preventDefault()
-const searchItem = searchField.value;
-if(!searchItem){
-  alert('Input field is empty!')
-  return;
+const searchField = document.getElementById("search-field");
+const btnSearch = document.getElementById("btn-search");
+btnSearch.addEventListener("click", (e) => {
+  e.preventDefault();
+  const searchItem = searchField.value;
+  if (!searchItem) {
+    alert("Input field is empty!");
+    return;
+  }
+  const postsContainer = document.getElementById("post-container");
+  postsContainer.innerHTML = "";
+  getPosts(
+    `https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchItem}`
+  );
+  // console.log(searchItem);
+  searchField.value = "";
+});
+
+function toogleLoadingSpinner(isLoading) {
+  const loadingSpinner = document.getElementById("loading-spinner");
+  // console.log(loadingSpinner);
+  if (isLoading) {
+    // console.log(loadingSpinner);
+    loadingSpinner?.classList.remove("hidden");
+    loadingSpinner?.classList.add("flex", "justify-center", "items-center");
+  } else {
+    loadingSpinner?.classList.remove("flex", "justify-center", "items-center");
+    loadingSpinner?.classList.add("hidden");
+  }
 }
-const postsContainer = document.getElementById("post-container");
-postsContainer.innerHTML = "";
-getPosts(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchItem}`)
-// console.log(searchItem);
-searchField.value = "";
-})

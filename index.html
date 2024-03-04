@@ -162,7 +162,7 @@
                                         </div>
                                         <input type="search" id="search-field"
                                             class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-full ps-10 bg-gray-50 focus:ring-0 focus:border-0"
-                                            placeholder="Search" />
+                                            placeholder="Search here anything" />
                                         <button id="btn-search"
                                             class="text-white absolute end-2.5 bottom-2.5 bg-primary hover:bg-[#5b5fda] focus:outline-none font-medium rounded-full text-sm px-4 py-2">Search</button>
                                     </div>
@@ -206,9 +206,11 @@
                     share, and connect with fellow antique aficionados. Start the conversation now!</p>
             </div>
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-6">
-                <div id="post-container" class="col-auto space-y-6 lg:col-span-4">
+                <div id="post-container" class="col-auto lg:col-span-4">
+                    <div id="loading-spinner" class="hidden h-96">
+                        <span class="inline-block loading loading-spinner loading-lg bg-primary"></span>
+                    </div>
                     <!-- Posts will added here -->
-
                 </div>
                 <div class="col-auto lg:col-span-2">
                     <div class="bg-[#12132d0d] min-h-40  p-4 md:p-6 rounded-2xl">
