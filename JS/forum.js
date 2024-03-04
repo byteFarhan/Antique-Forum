@@ -1,3 +1,4 @@
+let makeAsRead = 0;
 async function getData(url) {
   try {
     // const res = await fetch(
@@ -82,6 +83,10 @@ function displayPosts(posts) {
   console.log(posts);
   posts.forEach((post) => {
     const postsContainer = document.getElementById("post-container");
+    // const makeAsReadTotla = document.getElementById("make-as-read-total");
+    // const makeAsReadContainer = document.getElementById(
+    //   "make-as-read-container"
+    // );
     console.log(post);
     const div = document.createElement("div");
     div.classList =
@@ -93,7 +98,7 @@ function displayPosts(posts) {
                                   post?.image
                                 } alt=${post?.author?.name}>
                                 <span class="absolute top-0.5 left-10 md:left-12 lg:left-14 transform -translate-y-1/2 size-3.5 rounded-full ${
-                                  post?.isActive ? "bg-green-600" : "bg-red-600"
+                                  post?.isActive ? "bg-[#10B981]" : "bg-[#FF3434]"
                                 }"></span>
                             </div>
                         </div>
@@ -111,20 +116,22 @@ function displayPosts(posts) {
                             <div class="flex justify-between items-center mt-3 md:mt-5">
                                 <div class="flex gap-3 md:gap-6 *:flex *:items-center *:gap-1 *:md:gap-2">
                                     <div class="*:md:text-lg">
-                                        <i class="fa-regular fa-comment-dots"></i>
+                                        <i class="fa-regular fa-comment-dots text-natural"></i>
                                         <p>${post?.comment_count}</p>
                                     </div>
                                     <div class="*:md:text-lg">
-                                        <i class="fa-regular fa-eye"></i>
+                                        <i class="fa-regular fa-eye text-natural"></i>
                                         <p>${post?.view_count}</p>
                                     </div>
                                     <div class="*:md:text-lg">
-                                        <i class="fa-solid fa-hourglass-half"></i>
+                                        <i class="fa-solid fa-hourglass-half text-natural"></i>
                                         <p>${post?.posted_time} min</p>
                                     </div>
                                 </div>
                                 <div>
-                                    <img src="./images/email 1.svg" alt="" class="size-6 md:size-7 cursor-pointer">
+                                <img
+                                 onclick="addToMakeAsRead('${post?.title.replace("'","")}', '${post?.view_count}')"
+                                 src="./images/email 1.svg" alt="" class="size-6 md:size-7 cursor-pointer">
                                 </div>
                             </div>
                         </div>
@@ -133,6 +140,30 @@ function displayPosts(posts) {
       `;
     postsContainer.appendChild(div);
   });
+}
+function addToMakeAsRead(title, views) {
+  // title.replace("", "")
+
+  //   console.log(post);
+  //   title = "10 Kids Unaware of Their Halloween Costume";
+  //   views = 5600;
+  // title.replace("'","")
+  // console.log(title);
+  // console.log(views);
+  const makeAsReadTotlal = document.getElementById("make-as-read-total");
+  const makeAsReadContainer = document.getElementById("make-as-read-conatiner");
+  const div = document.createElement("div");
+  div.classList = "bg-white p-4 rounded-xl flex justify-between items-start gap-2";
+  div.innerHTML = `
+<h4 class="md:text-lg text-title font-semibold md:font-bold leading-normal font-mulish">${title}</h4>
+<div class="flex items-center gap-2 *:md:text-lg">
+    <i class="fa-regular fa-eye text-natural"></i>
+    <p>${views}</p>
+</div>
+`;
+  makeAsReadContainer.appendChild(div);
+  makeAsRead++;
+  makeAsReadTotlal.textContent = makeAsRead;
 }
 
 getPosts("https://openapi.programming-hero.com/api/retro-forum/posts");
