@@ -96,7 +96,7 @@ function displayPosts(posts) {
                                         <p>${post?.view_count}</p>
                                     </div>
                                     <div class="*:md:text-lg">
-                                        <i class="fa-solid fa-hourglass-half text-natural"></i>
+                                        <i class="fa-regular fa-clock text-natural"></i>
                                         <p>${post?.posted_time} min</p>
                                     </div>
                                 </div>
