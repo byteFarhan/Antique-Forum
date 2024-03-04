@@ -167,3 +167,19 @@ function addToMakeAsRead(title, views) {
 }
 
 getPosts("https://openapi.programming-hero.com/api/retro-forum/posts");
+
+const searchField = document.getElementById("search-field")
+const btnSearch = document.getElementById('btn-search')
+btnSearch.addEventListener('click',(e)=>{
+  e.preventDefault()
+const searchItem = searchField.value;
+if(!searchItem){
+  alert('Input field is empty!')
+  return;
+}
+const postsContainer = document.getElementById("post-container");
+postsContainer.innerHTML = "";
+getPosts(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchItem}`)
+// console.log(searchItem);
+searchField.value = "";
+})
