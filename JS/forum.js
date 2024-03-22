@@ -1,8 +1,10 @@
-let makeAsRead = 0;
-const bookMarks = [];
+let makeAsReadTotal = 0;
+let makeAsReadPosts = [];
 const searchField = document.getElementById("search-field");
 const btnSearch = document.getElementById("btn-search");
 const postsContainer = document.getElementById("post-container");
+const showMakeAsReadTotal = document.getElementById("make-as-read-total");
+const makeAsReadContainer = document.getElementById("make-as-read-conatiner");
 
 function toogleLoadingSpinner(isLoading) {
   const loadingSpinner = document.getElementById("loading-spinner");
@@ -135,14 +137,15 @@ function addToMakeAsRead(title, views, id) {
   //   console.log(bookMarkPost);
   // const { id, title, views } = bookMarkPost;
   // console.log(id);
-  const isPostExist = bookMarks.find((bookMark) => bookMark.id === id);
+  const isPostExist = makeAsReadPosts.find((bookMark) => bookMark.id === id);
   // console.log(isPostExist);
   if (isPostExist) {
     alert("Post has already been added!");
     return;
   }
   const newBookMark = { id, title, views };
-  bookMarks.push(newBookMark);
+  makeAsReadPosts.push(newBookMark);
+  savePostsToLocalStorage(makeAsReadPosts);
   // console.log(newBookMark);
   // console.log(bookMarks);
 
@@ -154,8 +157,13 @@ function addToMakeAsRead(title, views, id) {
   // title.replace("'","")
   // console.log(title);
   // console.log(views);
-  const makeAsReadTotlal = document.getElementById("make-as-read-total");
-  const makeAsReadContainer = document.getElementById("make-as-read-conatiner");
+  displayToMakeAsRead(title, views);
+  // const showMakeAsReadTotal = document.getElementById("make-as-read-total");
+  makeAsReadTotal++;
+  showMakeAsReadTotal.textContent = makeAsReadTotal;
+}
+function displayToMakeAsRead(title, views) {
+  // const makeAsReadContainer = document.getElementById("make-as-read-conatiner");
   const div = document.createElement("div");
   div.classList =
     "bg-white p-4 rounded-xl flex justify-between items-start gap-2";
@@ -167,8 +175,6 @@ function addToMakeAsRead(title, views, id) {
 </div>
 `;
   makeAsReadContainer.appendChild(div);
-  makeAsRead++;
-  makeAsReadTotlal.textContent = makeAsRead;
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 async function getLatestPosts(url) {
@@ -240,3 +246,47 @@ function displayLatestPosts(datas) {
 getLatestPosts(
   "https://openapi.programming-hero.com/api/retro-forum/latest-posts"
 );
+
+function savePostsToLocalStorage(postsToSave) {
+  const postStringifyed = JSON.stringify(postsToSave);
+  console.log(postStringifyed);
+  localStorage.setItem("posts", postStringifyed);
+}
+function getPostsFromLocalStorage() {
+  let posts = [];
+  const postsFromLocalStorage = localStorage.getItem("posts");
+  console.log(postsFromLocalStorage);
+  if (postsFromLocalStorage) {
+    posts = JSON.parse(postsFromLocalStorage);
+  }
+  // console.log(posts);
+  return posts;
+}
+function displayPostsFromLocalStorage() {
+  // const postsToDisplay = getPostsFromLocalStorage();
+  // makeAsReadPosts = postsToDisplay;
+  makeAsReadPosts = getPostsFromLocalStorage();
+  makeAsReadTotal = makeAsReadPosts?.length;
+  showMakeAsReadTotal.textContent = makeAsReadTotal;
+  console.log(makeAsReadPosts);
+  // const makeAsReadContainer = document.getElementById("make-as-read-conatiner");
+  makeAsReadPosts.forEach((post) =>
+    displayToMakeAsRead(post?.title, post?.views)
+  );
+
+  //   {
+  //     // postsToDisplay.forEach((post) => {
+  //     const div = document.createElement("div");
+  //     div.classList =
+  //       "bg-white p-4 rounded-xl flex justify-between items-start gap-2";
+  //     div.innerHTML = `
+  // <h4 class="md:text-lg text-title font-semibold md:font-bold leading-normal font-mulish">${post?.title}</h4>
+  // <div class="flex items-center gap-2 *:md:text-lg">
+  //     <i class="fa-regular fa-eye text-natural"></i>
+  //     <p>${post?.views}</p>
+  // </div>
+  // `;
+  //     makeAsReadContainer.appendChild(div);
+  //   }
+}
+displayPostsFromLocalStorage();
