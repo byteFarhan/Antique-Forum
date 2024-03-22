@@ -3,6 +3,7 @@ let makeAsReadPosts = [];
 const searchField = document.getElementById("search-field");
 const btnSearch = document.getElementById("btn-search");
 const postsContainer = document.getElementById("post-container");
+const notFound = document.getElementById("not-found");
 const showMakeAsReadTotal = document.getElementById("make-as-read-total");
 const makeAsReadContainer = document.getElementById("make-as-read-conatiner");
 
@@ -55,23 +56,33 @@ async function getPosts(url) {
 
 function displayPosts(posts) {
   // console.log(posts);
-  posts.forEach((post) => {
-    // const makeAsReadTotla = document.getElementById("make-as-read-total");
-    // const makeAsReadContainer = document.getElementById(
-    //   "make-as-read-container"
-    // );
-    // console.log(post);
-    // let sendtoBookmark = {
-    //   id: post?.id,
-    //   title: post?.title,
-    //   views: post?.view_count,
-    // };
-    // sendtoBookmark = JSON.stringify(sendtoBookmark);
-    // console.log(sendtoBookmark);
-    const div = document.createElement("div");
-    div.classList =
-      "flex gap-4 md:gap-6 p-6 md:p-8 lg:p-10 rounded-3xl bg-[#F3F3F5] hover:bg-[#797dfc1a] border border-transparent hover:border-primary delay-100 mb-6";
-    div.innerHTML = `
+  if (!posts?.length) {
+    // const notFound = document.getElementById("not-found");
+    toogleLoadingSpinner(false);
+    notFound.classList.remove("hidden");
+    notFound.classList.add("flex", "justify-center", "items-center");
+    return;
+  }
+  notFound.classList.remove("flex", "justify-center", "items-center");
+  notFound.classList.add("hidden");
+  posts &&
+    posts.forEach((post) => {
+      // const makeAsReadTotla = document.getElementById("make-as-read-total");
+      // const makeAsReadContainer = document.getElementById(
+      //   "make-as-read-container"
+      // );
+      // console.log(post);
+      // let sendtoBookmark = {
+      //   id: post?.id,
+      //   title: post?.title,
+      //   views: post?.view_count,
+      // };
+      // sendtoBookmark = JSON.stringify(sendtoBookmark);
+      // console.log(sendtoBookmark);
+      const div = document.createElement("div");
+      div.classList =
+        "flex gap-4 md:gap-6 p-6 md:p-8 lg:p-10 rounded-3xl bg-[#F3F3F5] hover:bg-[#797dfc1a] border border-transparent hover:border-primary delay-100 mb-6";
+      div.innerHTML = `
                         <div class="">
                             <div class="relative">
                                 <img class="size-16 lg:size-[72px] rounded-xl object-cover cursor-pointer" src=${
@@ -123,8 +134,8 @@ function displayPosts(posts) {
                     </div>  
     
       `;
-    postsContainer.appendChild(div);
-  });
+      postsContainer.appendChild(div);
+    });
   toogleLoadingSpinner(false);
 }
 
@@ -255,7 +266,7 @@ function savePostsToLocalStorage(postsToSave) {
 function getPostsFromLocalStorage() {
   let posts = [];
   const postsFromLocalStorage = localStorage.getItem("posts");
-  console.log(postsFromLocalStorage);
+  // console.log(postsFromLocalStorage);
   if (postsFromLocalStorage) {
     posts = JSON.parse(postsFromLocalStorage);
   }
@@ -268,11 +279,12 @@ function displayPostsFromLocalStorage() {
   makeAsReadPosts = getPostsFromLocalStorage();
   makeAsReadTotal = makeAsReadPosts?.length;
   showMakeAsReadTotal.textContent = makeAsReadTotal;
-  console.log(makeAsReadPosts);
+  // console.log(makeAsReadPosts);
   // const makeAsReadContainer = document.getElementById("make-as-read-conatiner");
-  makeAsReadPosts.forEach((post) =>
-    displayToMakeAsRead(post?.title, post?.views)
-  );
+  makeAsReadPosts?.length &&
+    makeAsReadPosts.forEach((post) =>
+      displayToMakeAsRead(post?.title, post?.views)
+    );
 
   //   {
   //     // postsToDisplay.forEach((post) => {
