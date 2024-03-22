@@ -1,4 +1,5 @@
 let makeAsRead = 0;
+const bookMarks = [];
 const searchField = document.getElementById("search-field");
 const btnSearch = document.getElementById("btn-search");
 const postsContainer = document.getElementById("post-container");
@@ -41,10 +42,10 @@ async function getPosts(url) {
     const res = await fetch(url);
     const posts = await res.json();
     // console.log(posts);
-    setTimeout(() => {
-      displayPosts(posts.posts);
-    }, 2000);
-    // displayPosts(posts.posts);
+    // setTimeout(() => {
+    //   displayPosts(posts.posts);
+    // }, 1000);
+    displayPosts(posts.posts);
   } catch (e) {
     console.error(e.message);
   }
@@ -58,6 +59,13 @@ function displayPosts(posts) {
     //   "make-as-read-container"
     // );
     // console.log(post);
+    // let sendtoBookmark = {
+    //   id: post?.id,
+    //   title: post?.title,
+    //   views: post?.view_count,
+    // };
+    // sendtoBookmark = JSON.stringify(sendtoBookmark);
+    // console.log(sendtoBookmark);
     const div = document.createElement("div");
     div.classList =
       "flex gap-4 md:gap-6 p-6 md:p-8 lg:p-10 rounded-3xl bg-[#F3F3F5] hover:bg-[#797dfc1a] border border-transparent hover:border-primary delay-100 mb-6";
@@ -67,7 +75,7 @@ function displayPosts(posts) {
                                 <img class="size-16 lg:size-[72px] rounded-xl object-cover" src=${
                                   post?.image
                                 } alt=${post?.author?.name}>
-                                <span class="absolute top-0.5 left-10 md:left-12 lg:left-14 transform -translate-y-1/2 size-3.5 rounded-full ${
+                                <span class="absolute top-0.5 left-10 md:left-12 lg:left-14 transform -translate-y-1/2 size-2.5 md:size-3.5 rounded-full ${
                                   post?.isActive
                                     ? "bg-[#10B981]"
                                     : "bg-[#FF3434]"
@@ -105,7 +113,7 @@ function displayPosts(posts) {
                                  onclick="addToMakeAsRead('${post?.title.replace(
                                    "'",
                                    ""
-                                 )}', '${post?.view_count}')"
+                                 )}', '${post?.view_count}','${post?.id}')"
                                  src="./images/email 1.svg" alt="" class="size-6 md:size-7 cursor-pointer">
                                 </div>
                             </div>
@@ -120,7 +128,24 @@ function displayPosts(posts) {
 
 getPosts("https://openapi.programming-hero.com/api/retro-forum/posts");
 
-function addToMakeAsRead(title, views) {
+function addToMakeAsRead(title, views, id) {
+  // function addToMakeAsRead(bookMarkPostStr) {
+  //   console.log(bookMarkPostStr);
+  //   const bookMarkPost = JSON.parse(bookMarkPostStr);
+  //   console.log(bookMarkPost);
+  // const { id, title, views } = bookMarkPost;
+  // console.log(id);
+  const isPostExist = bookMarks.find((bookMark) => bookMark.id === id);
+  // console.log(isPostExist);
+  if (isPostExist) {
+    alert("Post has already been added!");
+    return;
+  }
+  const newBookMark = { id, title, views };
+  bookMarks.push(newBookMark);
+  // console.log(newBookMark);
+  // console.log(bookMarks);
+
   // title.replace("", "")
 
   //   console.log(post);
