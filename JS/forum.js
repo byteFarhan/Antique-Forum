@@ -72,7 +72,7 @@ function displayPosts(posts) {
     div.innerHTML = `
                         <div class="">
                             <div class="relative">
-                                <img class="size-16 lg:size-[72px] rounded-xl object-cover" src=${
+                                <img class="size-16 lg:size-[72px] rounded-xl object-cover cursor-pointer" src=${
                                   post?.image
                                 } alt=${post?.author?.name}>
                                 <span class="absolute top-0.5 left-10 md:left-12 lg:left-14 transform -translate-y-1/2 size-2.5 md:size-3.5 rounded-full ${
@@ -108,8 +108,8 @@ function displayPosts(posts) {
                                         <p>${post?.posted_time} min</p>
                                     </div>
                                 </div>
-                                <div>
-                                <img
+                                <div class="tooltip tooltip-bottom" data-tip="Mark as read">
+                                <img 
                                  onclick="addToMakeAsRead('${post?.title.replace(
                                    "'",
                                    ""
@@ -197,7 +197,7 @@ function displayLatestPosts(datas) {
     div.innerHTML = `
     <figure class="">
         <img src=${data?.cover_image} alt="${data?.title}"
-            class="rounded-2xl" />
+            class="rounded-2xl cursor-pointer" />
     </figure>
     <div class="flex-grow space-y-3 mt-5">
         <div class="text-natural flex gap-2 items-center">
@@ -218,9 +218,9 @@ function displayLatestPosts(datas) {
       <div class="flex gap-4 items-center mt-3">
         <img src=${data?.profile_image} alt=${
       data?.author?.name
-    } class="size-12 object-cover rounded-full">
+    } class="size-12 object-cover rounded-full cursor-pointer">
             <div>
-                <h6 class="font-bold">${data?.author?.name}</h6>
+                <h6 class="font-bold cursor-pointer">${data?.author?.name}</h6>
                 <p class="text-sm font-mulish">${
                   data?.author?.designation
                     ? data?.author?.designation
